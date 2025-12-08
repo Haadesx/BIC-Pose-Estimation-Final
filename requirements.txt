@@ -1,0 +1,18 @@
+# Core ML
+torch>=1.12.0
+torchvision>=0.13.0
+numpy>=1.21.0
+
+# Computer Vision & Processing
+opencv-python>=4.5.0
+mediapipe>=0.10.0
+protobuf>=3.20.0, <4.0.0
+# Note: Recent mediapipe might require newer protobuf, check compatibility if install fails.
+# Tested with protobuf 3.20+ and 4.25+ depending on OS.
+# IF using mediapipe 0.10.14+, use:
+# protobuf>=4.25.3
+
+# Data Handling
+h5py>=3.1.0
+tqdm>=4.60.0
+matplotlib>=3.3.0
