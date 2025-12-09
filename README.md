@@ -82,7 +82,8 @@ Visualizes the model's predictions against the generated labels.
 ```bash
 python visualize_inference.py
 ```
-- **Input**: Loads the latest checkpoint (e.g., `pointnet_epoch_49.pth`).
+- **Input**: Uses `best_model.pth` (included in repo) or your own `checkpoints/`.
+  - *Note: Update the script to point to `best_model.pth` if not using local training checkpoints.*
 - **Output**: Saves `inference_result.png` showing:
   - **Green**: Event Data (Rasterized)
   - **Yellow**: Ground Truth (Pseudo-Labels)

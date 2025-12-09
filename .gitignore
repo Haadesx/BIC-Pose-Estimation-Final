@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 *.npy
 *.pth
+!best_model.pth
 .DS_Store
 .vscode/
 .idea/
