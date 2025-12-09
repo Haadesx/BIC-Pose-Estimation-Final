@@ -89,6 +89,27 @@ python visualize_inference.py
   - **Yellow**: Ground Truth (Pseudo-Labels)
   - **Red**: Model Predictions
 
+## Model Architecture
+
+The core model is a modified **PointNet** architecture adapted for pose regression.
+
+### 1. Encoder (Feature Extraction)
+The network takes raw event point clouds `(N, 5)` as input (x, y, t, p, mask).
+- **Layers:** A series of 1D Convolutions with Batch Norm and LeakyReLU.
+  - `Conv1d`: 5 -> 64
+  - `Conv1d`: 64 -> 64
+  - `Conv1d`: 64 -> 128
+  - `Conv1d`: 128 -> 256
+- **Feature Aggregation:** Intermediate features from these layers are concatenated.
+- **Global Feature:** A final `Conv1d` (512 -> 1024) allows for global context, followed by **Adaptive Max & Average Pooling** to aggregate point features into a global vector.
+
+### 2. Decoder (Pose Regression)
+The global feature vector is fed into a series of fully connected layers:
+- **MLP Block:** Linear(2048 -> 1024) -> Linear(1024 -> 128 * Num_Joints).
+- **Heads:** Separate Linear layers project features to X and Y coordinate heatmaps (SimDR representation).
+  - `mlp_head_x`: 128 -> Sensor_Width (346)
+  - `mlp_head_y`: 128 -> Sensor_Height (260)
+
 ## Project Structure
 - `dataset/`: Contains `DHP19EPC.py` (Data Loader) and helper classes.
 - `models/`: Contains `PointNet.py` and other architecture definitions.
